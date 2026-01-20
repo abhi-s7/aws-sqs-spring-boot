@@ -1,0 +1,11 @@
+#!/bin/bash
+# Update these with your EC2 details
+EC2_HOST="your-ec2-ip"
+KEY_FILE="your-key.pem"
+
+# Build and deploy
+./mvnw clean package -DskipTests
+scp -i "$KEY_FILE" target/*.jar ec2-user@$EC2_HOST:/home/ec2-user/
+ssh -i "$KEY_FILE" ec2-user@$EC2_HOST 'sudo systemctl restart sqs-app'
+
+echo "Done! Access at http://$EC2_HOST:8080"
