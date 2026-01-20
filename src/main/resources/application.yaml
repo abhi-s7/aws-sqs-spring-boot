@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: aws-sqs-spring-boot
+  web:
+    resources:
+      static-locations: classpath:/static/
+
+server:
+  port: 8080
+
+aws:
+  sqs:
+    region: ${AWS_SQS_REGION:us-west-1}
+    access-key: ${AWS_SQS_ACCESS_KEY:}
+    secret-key: ${AWS_SQS_SECRET_KEY:}

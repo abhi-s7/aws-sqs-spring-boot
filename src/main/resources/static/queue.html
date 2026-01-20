@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Language" content="en">
+    <title>AWS SQS Producer/Consumer</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<h1>AWS SQS Producer & Consumer</h1>
+
+<nav>
+    <a href="/">Queue Management</a>
+    <a href="queue.html">Producer/Consumer</a>
+</nav>
+
+<div class="queue-selector section">
+    <h3>Select Queue</h3>
+    
+    <div style="display: flex; gap: 10px; margin-bottom: 10px;">
+        <div style="flex: 1;">
+            <label for="selectedQueueUrl">Queue URL</label>
+            <input type="text" id="selectedQueueUrl" placeholder="Enter queue URL manually or select from list below" style="width: 90%;">
+        </div>
+        <div style="display: flex; align-items: flex-end;">
+            <button onclick="loadQueues()" style="margin-bottom: 10px;">Load Available Queues</button>
+        </div>
+    </div>
+    
+    <div id="queueSelectList" class="queue-list"></div>
+</div>
+
+<div class="split-container">
+    <!-- Producer Section (Left) -->
+    <div class="producer-section">
+        <h3>Producer - Send Gift Card</h3>
+        <form id="producerForm" onsubmit="sendMessage(event)">
+            <label for="userName">User Name</label>
+            <input type="text" id="userName" name="userName" required placeholder="Enter user name">
+
+            <label for="giftCardType">Gift Card Type</label>
+            <select id="giftCardType" name="giftCardType" required>
+                <option value="">-- Select Type --</option>
+                <option value="Amazon">Amazon</option>
+                <option value="Starbucks">Starbucks</option>
+                <option value="McDonalds">McDonald's</option>
+                <option value="Others">Others</option>
+            </select>
+
+            <label for="amount">Amount ($)</label>
+            <input type="number" id="amount" name="amount" required placeholder="Enter amount" step="0.01" min="0">
+
+            <label for="date">Date</label>
+            <input type="date" id="date" name="date" required>
+
+            <button type="submit">Publish Message</button>
+            <div id="producerResult" class="result"></div>
+        </form>
+    </div>
+
+    <!-- Consumer Section (Right) -->
+    <div class="consumer-section">
+        <h3>Consumer - Receive Messages</h3>
+        <button onclick="pollMessages()">Poll Queue</button>
+        <div id="consumerResult" class="result"></div>
+        
+        <div class="message-list" id="messageList">
+            <div class="empty-state">No messages received yet. Click "Poll Queue" to fetch messages.</div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="js/queue.js"></script>
+
+</body>
+</html>

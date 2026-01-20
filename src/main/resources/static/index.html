@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Language" content="en">
+    <title>AWS SQS Manager</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<h1>AWS SQS Queue Manager</h1>
+
+<nav>
+    <a href="/">Queue Management</a>
+    <a href="queue.html">Producer/Consumer</a>
+</nav>
+
+<div class="container">
+    <!-- Section 1: Create Queue -->
+    <div class="section">
+        <h3>Create Queue</h3>
+        <form id="createQueueForm" onsubmit="createQueue(event)">
+            <label for="queueName">Queue Name</label>
+            <input type="text" id="queueName" name="queueName" required placeholder="Enter queue name">
+            <input type="submit" value="Create Queue">
+            <div id="createQueueResult" class="result"></div>
+        </form>
+    </div>
+
+    <!-- Section 2: List Queues -->
+    <div class="section">
+        <h3>List Queues</h3>
+        <button onclick="listQueues()">Refresh Queue List</button>
+        <div id="queueListResult" class="result"></div>
+        <div id="queueList" class="queue-list"></div>
+    </div>
+
+    <!-- Section 3: Get Queue URL -->
+    <div class="section">
+        <h3>Get Queue URL</h3>
+        <form id="getQueueUrlForm" onsubmit="getQueueUrl(event)">
+            <label for="getQueueName">Queue Name</label>
+            <input type="text" id="getQueueName" name="queueName" required placeholder="Enter queue name">
+            <input type="submit" value="Get Queue URL">
+            <div id="getQueueUrlResult" class="result"></div>
+        </form>
+    </div>
+
+    <!-- Section 4: Delete Queue -->
+    <div class="section">
+        <h3>Delete Queue</h3>
+        <form id="deleteQueueForm" onsubmit="deleteQueue(event)">
+            <label for="deleteQueueUrl">Queue URL</label>
+            <input type="text" id="deleteQueueUrl" name="queueUrl" required placeholder="Enter queue URL">
+            <button type="submit" class="danger">Delete Queue</button>
+            <div id="deleteQueueResult" class="result"></div>
+        </form>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="js/app.js"></script>
+
+</body>
+</html>
